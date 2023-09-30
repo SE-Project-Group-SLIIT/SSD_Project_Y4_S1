@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import Header from "../../Header";
+import Header from "../shared/Header";
 
 export default function UpdateEmployee({data , cl}){
     const [Name, setName] = useState("");

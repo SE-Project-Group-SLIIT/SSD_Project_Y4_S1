@@ -3,7 +3,7 @@ import axios from "axios";
 import DatePicker from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import Pdf from "react-to-pdf";
-import Header from "../../Header";
+import Header from "../shared/Header";
 import Swal from "sweetalert2";
 
 const ref = React.createRef();

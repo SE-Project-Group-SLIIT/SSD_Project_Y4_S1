@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 
 import UpdateEmployee from './UpdateEmployee';
 
-import Header from "../../Header";
+import Header from "../shared/Header";
 
 
 

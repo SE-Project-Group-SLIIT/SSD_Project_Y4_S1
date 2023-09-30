@@ -4,7 +4,7 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
-import Header from '../../Header';
+import Header from '../shared/Header';
 import Pdf from "react-to-pdf";
 import Swal from 'sweetalert2';
 

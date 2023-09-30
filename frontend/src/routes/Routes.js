@@ -21,11 +21,12 @@ import AllEmployee from "../components/employeeManagement/AllEmployee";
 import UpdateEmployee from "../components/employeeManagement/UpdateEmployee";
 import RemovedEmployee from "../components/employeeManagement/RemovedEmployee";
 import PrivateRoutes from './privateRoutes';
+import PublicRoutes from './PublicRoutes';
 // import Footer from '../Footer';
 import login from '../components/login'
 
 
-export const Routes = () => {
+ const Routes = () => {
   return (
     <div>
         <Router>
@@ -35,7 +36,7 @@ export const Routes = () => {
             <PrivateRoutes path = "/vehicle/viewVehicle" exact component={vehicleList}/>
             <PrivateRoutes path = "/vehicle/view" exact component={DeletedList}/>
             <PrivateRoutes path = "/vehicle/viewVehicleReport" exact component={VehicleReport}/> 
-            <PrivateRoutes path = "/login" exact component={login}/>
+            <PublicRoutes path = "/login" exact component={login}/>
 
             <PrivateRoutes path="/addRental" exact component={RentalPlacement} />
             <PrivateRoutes path="/rentalList" exact component={rentalList} />
@@ -59,3 +60,5 @@ export const Routes = () => {
     </div>
   )
 }
+
+export default Routes;

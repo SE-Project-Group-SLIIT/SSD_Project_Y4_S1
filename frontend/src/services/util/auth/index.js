@@ -9,13 +9,15 @@ export let signin = async (email, password) => {
             email: email,
             password: password,
         })
-
-        if (value.success === true){
+        console.log("data",value.success)
+        if (value.data){
+            console.log("Local storage data set starting.")
             setAccessToken(value.data.token)
             setAccountStatus(value.data.isActive)
             localStorage.setItem('userId', value.data.userId);
-            localStorage.setItem('Permissions', JSON.stringify(value.data.permissions));
+            localStorage.setItem('Permissions', value.data.permissions);
             localStorage.setItem(TOKEN_KEY,true);
+            console.log("Local storage data set successfully.");
         }
         return value;
     } catch (error) {

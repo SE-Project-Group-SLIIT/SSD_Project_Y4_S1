@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import moment from 'moment';
 import DatePicker from 'react-datetime';
 
-import Header from "../../Header";
+import Header from "../shared/Header";
 
 
 

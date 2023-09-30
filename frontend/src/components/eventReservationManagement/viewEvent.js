@@ -7,7 +7,7 @@ import { useParams } from "react-router";
 import Swal from "sweetalert2";
 import Eventviewmodal from "../eventReservationManagement/modals/eventView";
 import UpdateEventModal from "../eventReservationManagement/modals/updateEvent";
-import Header from "../../Header";
+import Header from "../shared/Header";
 
 function ViewEvent() {
   const [viewevent, setviewevent] = useState([]);

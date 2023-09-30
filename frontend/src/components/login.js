@@ -16,10 +16,10 @@ export default function LoginUser() {
     //pass the username and password and if exact user exsits will be directed to dashbord else it will display error for unavailable user
     let respond = await signin(username, password);
     if(respond.success === true){
-
+console.log("good")
     }
     else{
-
+      console.log("good")
     }
 
   }

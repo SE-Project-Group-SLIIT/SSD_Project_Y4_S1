@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
-import Header from "../../Header";
+import Header from "../shared/Header";
 import TestModal from "./modals/deleteview";
 
 
