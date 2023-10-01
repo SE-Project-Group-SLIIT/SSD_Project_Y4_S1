@@ -1,98 +1,104 @@
 import axios from "axios";
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Modal,Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 import Header from "../shared/Header";
+import { viewAllInactiveEmployees } from "../../services/util/employee";
 
 const RemovedEmployee = () => {
-    const [employees, setEmployees] = useState([]);
-    // const [showEmp, setShowEmp] = useState(false);
-    // const [modalEmp, setEmp] = useState([]);
+	const [employees, setEmployees] = useState([]);
+	// const [showEmp, setShowEmp] = useState(false);
+	// const [modalEmp, setEmp] = useState([]);
 
-    useEffect(() => {
+	useEffect(() => {
+		async function getEmployees() {
+			try {
+				let respond = await viewAllInactiveEmployees();
+				if (respond.data) {
+					setEmployees(respond.data);
+				} else {
+					console.log("error");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
 
-        function getEmployees() {
-            axios.get("http://localhost:8070/REmployee/allREmp").then((res) => {
-                setEmployees(res.data.reverse());
-                console.log("Data recieved");
-            }).catch((error) => {
-                alert(error.message);
-            })
-        }
+		getEmployees();
+	}, []);
 
-        getEmployees();
+	return (
+        <div className="container pt-2">
+		<div className="page-component-body">
+			<Header></Header>
 
-    }, []);
+			<div className="table-emp" style={{ width: "1180px" }}>
+				<div class="row table-head mt-3">
+					<div class="col">
+						<h3 className="float-left ">
+							List of Inactive Employees
+						</h3>
+					</div>
+					<a href="/all-employee-list" class="float-right">
+						<button class="btn btn-ok white" style={{ marginRight: "25px" }}>
+							All Employees
+						</button>
+					</a>
+                    <a href="/active-employee-list" class="float-right">
+							<button
+								class="btn btn-ok white"
+								>
+								Active Employees
+							</button>
+						</a>
+				</div>
 
-    return(
-        <div className="page-component-body">
-            <Header></Header>
-
-
-            <div className="table-emp">
-                <div class="row table-head mt-3">
-                    <div class="col">
-                        <h3 className="float-left ">List of Removed Employees</h3>
-                    </div>
-                    <a href="/addEmp" class="float-right">
-                        <button class="btn btn-ok white">
-                            Add Employee
-                        </button>
-                    </a>
-                    <a href="/allEmp" class="float-right">
-                        <button class="btn btn-ok white">
-                            Current Employees
-                        </button>
-                    </a>
-                   
-                </div>
-            
-
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center">EmpName</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Phone</th>
-                            <th class="text-center">NIC</th>
-                            <th class="text-right">Designation</th>
-                            {/* <th class="text-right">Action</th> */}
-                           
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        {employees.map((employee) => {
-
-                            return (
-                                <tr>
-                                    <td class="text-center">{employee.Name}</td>
-                                    <td class="text-center">{employee.Email}</td>
-                                    <td class="text-center">{employee.Phone}</td>
-                                    <td class="text-center">{employee.NIC}</td>
-                                    <td class="text-right">{employee.Designation}</td>
-                                    {/* <td class="text-center">
-                                        <button
-                                             class="btn btn-light btn-sm"
-                                             onClick={() => openModalEmpUpdate(employee)}
-                                        >
-                                            Update
-                                        </button>
-                                        <button
-                                            onClick={() => openModalEmpDelete(employee)}
-                                            class="btn btn-danger btn-sm"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td> */}
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </div>
-            </div>
-    )
-}
-export default RemovedEmployee
+				<table class="table table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th class="text-center">First Name</th>
+							<th class="text-center">Last Name</th>
+							<th class="text-center">Address</th>
+							<th class="text-center">Email Address</th>
+							<th class="text-center">Phone Number</th>
+							<th class="text-center">NIC</th>
+							<th class="text-center">Designation</th>
+						</tr>
+					</thead>
+					<tbody>
+						{employees.map((employee) => {
+							return (
+								<tr>
+									<td class="text-center">
+										{employee.firstName}
+									</td>
+									<td class="text-center">
+										{employee.lastName}
+									</td>
+									<td class="text-center">
+										{employee.address}
+									</td>
+									<td class="text-center">
+										{employee.emailAddress}
+									</td>
+									<td class="text-center">
+										{employee.phoneNumber}
+									</td>
+									<td class="text-center">
+										{employee.nic}
+									</td>
+									<td class="text-center">
+										{employee.designation}
+									</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
+		</div>
+        </div>
+	);
+};
+export default RemovedEmployee;
