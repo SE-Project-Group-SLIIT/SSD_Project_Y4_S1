@@ -14,7 +14,7 @@ export let signin = async (email, password) => {
             setAccessToken(value.data.token)
             setAccountStatus(value.data.isActive)
             localStorage.setItem('userId', value.data.userId);
-            localStorage.setItem('Permissions', value.data.permissions);
+            localStorage.setItem('Permissions', JSON.stringify(value.data.permissions));
             localStorage.setItem(TOKEN_KEY,true);
         }
         return value;
@@ -140,6 +140,10 @@ export let setAccountStatus = (value) => {
 //get Account Status
 export let getAccountStatus = () => {
     return localStorage.getItem('activated');
+}
+//get Account permission
+export let getAccountPermission = () => {
+    return localStorage.getItem('Permissions');
 }
 
 //delete Access Token

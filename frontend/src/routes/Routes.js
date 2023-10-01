@@ -24,7 +24,7 @@ import PrivateRoutes from './privateRoutes';
 import PublicRoutes from './PublicRoutes';
 // import Footer from '../Footer';
 import login from '../components/login'
-
+import WithPermission from "./withPermission"; // Import your HOC
 
  const Routes = () => {
   return (
@@ -37,7 +37,7 @@ import login from '../components/login'
             <PrivateRoutes path = "/vehicle/view" exact component={DeletedList}/>
             <PrivateRoutes path = "/vehicle/viewVehicleReport" exact component={VehicleReport}/> 
             <PublicRoutes path = "/login" exact component={login}/>
-
+            
             <PrivateRoutes path="/addRental" exact component={RentalPlacement} />
             <PrivateRoutes path="/rentalList" exact component={rentalList} />
             
@@ -47,10 +47,10 @@ import login from '../components/login'
             <PrivateRoutes path="/reservation/report" exact component={EventReport} />
             <PrivateRoutes path="/display/RemoveEventlist" exact component={DeleteRecord} />
             
-            <PrivateRoutes path="/addEmp" exact component={AddEmployee} />
-            <PrivateRoutes path="/allEmp" exact component={AllEmployee}/>
-            <PrivateRoutes path="/updateEmp" exact component={UpdateEmployee}/>
-            <PrivateRoutes path="/REmp" exact component={RemovedEmployee}/>
+            <PrivateRoutes path="/addEmp" exact component={WithPermission(AddEmployee, "employeeManage")} />
+            <PrivateRoutes path="/allEmp" exact  component={WithPermission(AllEmployee, "employeeManage")} />
+            <PrivateRoutes path="/updateEmp" exact component={WithPermission(UpdateEmployee, "employeeManage")} />
+            <PrivateRoutes path="/REmp" exact component={WithPermission(RemovedEmployee, "employeeManage")}/>
             {/* <Route path="*" component={NotFound} /> */}
             </Switch>
         </Router>
