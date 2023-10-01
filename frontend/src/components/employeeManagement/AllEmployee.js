@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2'
-
+import { viewEmployees } from "../../services/util/employee"
 import UpdateEmployee from './UpdateEmployee';
 
 import Header from "../shared/Header";
@@ -26,24 +26,37 @@ export default function AllEmployee() {
 
     useEffect(() => {
 
-        function getEmployees() {
-            axios.get("http://localhost:8070/employee/allEmp").then((res) => {
-
-
-                setEmployees(res.data.reverse());
-                //console.log("Data recieved");
-
-            }).catch((error) => {
-                // alert(error.message);
-                console.log("f354754",error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                    confirmButtonColor: '#207159',
-
-                })
-            })
+        async function getEmployees() {
+            try{
+                let respond = await viewEmployees();
+                if(respond.data){
+                    setEmployees(respond.data);
+                }
+                else{
+                    console.log("error")
+                }
+                // axios.get("http://localhost:8070/employee/allEmp").then((res) => {
+    
+    
+                //     setEmployees(res.data.reverse());
+                //     //console.log("Data recieved");
+    
+                // }).catch((error) => {
+                //     // alert(error.message);
+                //     console.log("f354754",error);
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: 'Oops...',
+                //         text: 'Something went wrong!',
+                //         confirmButtonColor: '#207159',
+    
+                //     })
+                // })
+            }
+            catch(error){
+                console.log(error)
+            }
+            
 
         }
 
