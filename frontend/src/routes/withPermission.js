@@ -8,7 +8,6 @@ const WithPermission = (WrappedComponent, requiredPermission) => {
     render() {
       // Assuming you have a user object with permissions
       const permission = JSON.parse(getAccountPermission());
-      console.log("ata",permission)
 
       if (permission && permission.access_levels.includes(requiredPermission)) {
         return <WrappedComponent {...this.props} />;
