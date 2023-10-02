@@ -22,58 +22,6 @@ export default function AddEmployee() {
 	const [TeleErr, setTeleNoErr] = useState("");
 	const [NICErr, setNICErr] = useState("");
 
-	// function sendData(e) {
-	// 	e.preventDefault();
-
-	// 	const teleValid = TeleValidation();
-	// 	const NICValid = NICValidation();
-
-	// 	const newEmployee = {
-	// 		firstName,
-	// 		lastName,
-	// 		address,
-	// 		nic,
-	// 		dateOfBirth,
-	// 		phoneNumber,
-	// 		emailAddress,
-	// 		gender,
-	// 		joiningDate,
-	// 		designation,
-	// 	};
-
-	// 	//send data to the backend
-	// 	if (
-	// 		teleValid === true &&
-	// 		NICValid === true &&
-	// 		isMobileValid === true &&
-	// 		isValid === true &&
-	// 		isNICValid === true
-	// 	) {
-	// 		axios
-	// 			.post("http://localhost:8070/employee/add-new-employee", newEmployee)
-	// 			.then(() => {
-	// 				Swal.fire({
-	// 					title: "Success!",
-	// 					text: "Employee Details Added Succesfully",
-	// 					icon: "success",
-	// 					showConfirmButton: false,
-	// 					timer: 2000,
-	// 				}).then(() => {
-	// 					window.location.replace("/all-employee-list");
-	// 				});
-	// 			})
-	// 			.catch((err) => {
-	// 				const msgerr = err.response.data.status;
-	// 				Swal.fire({
-	// 					icon: "warning",
-	// 					title: "Oops...",
-	// 					text: `${msgerr}`,
-	// 					confirmButtonColor: "#1fc191",
-	// 				});
-	// 			});
-	// 	}
-	// }
-
 	async function sendData(e) {
 		e.preventDefault();
 	  
