@@ -5,6 +5,7 @@ import moment from 'moment';
 import DatePicker from 'react-datetime';
 
 import Header from "../shared/Header";
+import { addVehicle } from '../../services/util/vehicle';
 
 
 
@@ -46,7 +47,7 @@ function AddVehicle() {
 
 
 
-    function sendData(e) {
+    async function sendData(e) {
 
         e.preventDefault();
 
@@ -55,29 +56,9 @@ function AddVehicle() {
         const NICValid = NICValidation();
         const YearsValid = YearsValidation();
 
-
-
-
         if (isValid && teleValid && NICValid && YearsValid) {
 
-            
-            
-
-            //console.log("image eka", file);
-
-            // axios.post("http://localhost:8070/vehicle/addVehicle", formData)
-            //     .then((res) => {
-
-            //         path = res.data.toString();
-
-
-            //         setimgPath(res.data.toString());
-
-
-
-
                     const newVehicle = {
-
                         OwnerName,
                         OwnerNIC,
                         TeleNo,
@@ -96,32 +77,25 @@ function AddVehicle() {
                         NoOfSeats,
                         RatePDay,
                         YearsRent,
-                        // imgPath: path,
-                        // vehDoc
-
-
                     }
 
-                    axios.post("http://localhost:8070/vehicle/addVehicle", newVehicle)
+                    const response = await addVehicle(newVehicle)
 
-
-
-                        .then(() => {
-
-
+                    if(response.success){
+                    // axios.post("http://localhost:8070/api/vehicle/addVehicle", newVehicle)
                             Swal.fire({
                                 title: 'Success!',
                                 text: 'Vehicle Details Added Succesfully',
                                 icon: 'success',
                                 showConfirmButton: false,
                                 timer: 2000
-                            }
-                            ).then(() => {
-                                window.location.replace("/vehicle/viewVehicle");
+                            
+                            .then(() => {
+                                window.location.reload();
 
                             })
 
-
+                        
 
                         }).catch((err) => {
 
@@ -135,6 +109,33 @@ function AddVehicle() {
                             })
                         })
 
+                    }else{
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Vehicle Details Added Succesfully',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2000
+                        
+                        .then(() => {
+                            window.location.reload();
+
+                        })
+
+                    
+
+                    }).catch((err) => {
+
+                        const msgerr = err.response.data.status
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: `${msgerr}`,
+                            confirmButtonColor: '#1fc191',
+
+                        })
+                    })
+                    }
                     }
               
     }
