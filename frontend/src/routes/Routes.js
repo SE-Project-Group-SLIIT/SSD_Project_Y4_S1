@@ -21,101 +21,42 @@ import AllEmployee from "../components/employeeManagement/AllEmployee";
 import UpdateEmployee from "../components/employeeManagement/UpdateEmployee";
 import RemovedEmployee from "../components/employeeManagement/RemovedEmployee";
 import CurrentEmployee from "../components/employeeManagement/CurrentEmployee";
-
-import PrivateRoutes from "./privateRoutes";
-import PublicRoutes from "./PublicRoutes";
+import PrivateRoutes from './privateRoutes';
+import PublicRoutes from './PublicRoutes';
 // import Footer from '../Footer';
-import login from "../components/login";
+import login from '../components/login'
+import WithPermission from "./withPermission"; // Import your HOC
 
-const Routes = () => {
-	return (
-		<div>
-			<Router>
-				<Switch>
-					{/* Mew */}
-					<PrivateRoutes
-						path="/vehicle/addVehicle"
-						exact
-						component={AddVehicle}
-					/>
-					<PrivateRoutes
-						path="/vehicle/viewVehicle"
-						exact
-						component={vehicleList}
-					/>
-					<PrivateRoutes
-						path="/vehicle/view"
-						exact
-						component={DeletedList}
-					/>
-					<PrivateRoutes
-						path="/vehicle/viewVehicleReport"
-						exact
-						component={VehicleReport}
-					/>
-					<PublicRoutes path="/login" exact component={login} />
-
-					<PrivateRoutes
-						path="/addRental"
-						exact
-						component={RentalPlacement}
-					/>
-					<PrivateRoutes
-						path="/rentalList"
-						exact
-						component={rentalList}
-					/>
-
-					{/*  */}
-					<PrivateRoutes
-						path="/addEvent"
-						exact
-						component={Event}
-					/>
-					<PrivateRoutes
-						path="/viewEvent"
-						exact
-						component={ViewEvent}
-					/>
-					<PrivateRoutes
-						path="/reservation/report"
-						exact
-						component={EventReport}
-					/>
-					<PrivateRoutes
-						path="/display/RemoveEventlist"
-						exact
-						component={DeleteRecord}
-					/>
-
-					<PrivateRoutes
-						path="/add-new-employee"
-						exact
-						component={AddEmployee}
-					/>
-					<PrivateRoutes
-						path="/all-employee-list"
-						exact
-						component={AllEmployee}
-					/>
-					<PrivateRoutes
-						path="/updateEmp"
-						exact
-						component={UpdateEmployee}
-					/>
-					<PrivateRoutes
-						path="/inactive-employee-list"
-						exact
-						component={RemovedEmployee}
-					/>
-					<PrivateRoutes
-						path="/active-employee-list"
-						exact
-						component={CurrentEmployee}
-					/>
-					{/* <Route path="*" component={NotFound} /> */}
-				</Switch>
-			</Router>
+ const Routes = () => {
+  return (
+    <div>
+        <Router>
+            <Switch>
+            {/* Mew */}
+            <PrivateRoutes path="/vehicle/addVehicle" exact component={AddVehicle} />
+            <PrivateRoutes path = "/vehicle/viewVehicle" exact component={vehicleList}/>
+            <PrivateRoutes path = "/vehicle/view" exact component={DeletedList}/>
+            <PrivateRoutes path = "/vehicle/viewVehicleReport" exact component={VehicleReport}/> 
+            <PublicRoutes path = "/login" exact component={login}/>
+            
+            <PrivateRoutes path="/addRental" exact component={RentalPlacement} />
+            <PrivateRoutes path="/rentalList" exact component={rentalList} />
+            
+            {/*  */}
+            <PrivateRoutes path="/addEvent" exact component={Event} />
+            <PrivateRoutes path="/viewEvent"  exact component={ViewEvent} />
+            <PrivateRoutes path="/reservation/report" exact component={EventReport} />
+            <PrivateRoutes path="/display/RemoveEventlist" exact component={DeleteRecord} />
+            
+            <PrivateRoutes path="/add-new-employee" exact component={WithPermission(AddEmployee, "employeeManage")} />
+            <PrivateRoutes path="/all-employee-list" exact  component={WithPermission(AllEmployee, "employeeManage")} />
+            <PrivateRoutes path="/updateEmp" exact component={WithPermission(UpdateEmployee, "employeeManage")} />
+            <PrivateRoutes path="/inactive-employee-list" exact component={WithPermission(RemovedEmployee, "employeeManage")}/>
+            <PrivateRoutes path="/active-employee-list" exact component={WithPermission(CurrentEmployee, "employeeManage")} />
+					
+            {/* <Route path="*" component={NotFound} /> */}
+            </Switch>
+        </Router>
 		</div>
 	);
 };
