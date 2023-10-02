@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 
 import Header from "../shared/Header";
-import { viewAllInactiveEmployees } from "../../services/util/employee";
+import { viewAllActiveEmployees } from "../../services/util/employee";
 
-const RemovedEmployee = () => {
+const CurrentEmployee = () => {
 	const [employees, setEmployees] = useState([]);
 	// const [showEmp, setShowEmp] = useState(false);
 	// const [modalEmp, setEmp] = useState([]);
@@ -14,7 +14,7 @@ const RemovedEmployee = () => {
 	useEffect(() => {
 		async function getEmployees() {
 			try {
-				let respond = await viewAllInactiveEmployees();
+				let respond = await viewAllActiveEmployees();
 				if (respond.data) {
 					setEmployees(respond.data);
 				} else {
@@ -37,21 +37,24 @@ const RemovedEmployee = () => {
 				<div class="row table-head mt-3">
 					<div class="col">
 						<h3 className="float-left ">
-							List of Inactive Employees
+							List of Active Employees
 						</h3>
 					</div>
-					<a href="/all-employee-list" class="float-right">
+					<a href="/add-new-employee" class="float-right">
+						<button class="btn btn-ok white" style={{ marginRight: "25px" }}>
+							+ &nbsp; Add Employee
+						</button>
+					</a>
+                    <a href="/all-employee-list" class="float-right">
 						<button class="btn btn-ok white" style={{ marginRight: "25px" }}>
 							All Employees
 						</button>
 					</a>
-                    <a href="/active-employee-list" class="float-right">
-							<button
-								class="btn btn-ok white"
-								>
-								Active Employees
-							</button>
-						</a>
+					<a href="/inactive-employee-list" class="float-right">
+						<button class="btn btn-ok white">
+							Inactive Employees
+						</button>
+					</a>
 				</div>
 
 				<table class="table table-hover">
@@ -101,4 +104,4 @@ const RemovedEmployee = () => {
         </div>
 	);
 };
-export default RemovedEmployee;
+export default CurrentEmployee;
