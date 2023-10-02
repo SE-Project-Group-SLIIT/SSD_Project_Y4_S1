@@ -33,20 +33,20 @@ import WithPermission from "./withPermission"; // Import your HOC
         <Router>
             <Switch>
             {/* Mew */}
-            <PrivateRoutes path="/vehicle/addVehicle" exact component={AddVehicle} />
-            <PrivateRoutes path = "/vehicle/viewVehicle" exact component={vehicleList}/>
-            <PrivateRoutes path = "/vehicle/view" exact component={DeletedList}/>
-            <PrivateRoutes path = "/vehicle/viewVehicleReport" exact component={VehicleReport}/> 
+            <PrivateRoutes path="/vehicle/addVehicle" exact component={WithPermission(AddVehicle, "vehicleManage")} />
+            <PrivateRoutes path = "/vehicle/viewVehicle" exact component={WithPermission(vehicleList, "vehicleManage")}/>
+            <PrivateRoutes path = "/vehicle/view" exact component={WithPermission(DeletedList, "vehicleManage")}/>
+            <PrivateRoutes path = "/vehicle/viewVehicleReport" exact component={WithPermission(VehicleReport, "vehicleManage")}/> 
             <PublicRoutes path = "/login" exact component={login}/>
             
-            <PrivateRoutes path="/addRental" exact component={RentalPlacement} />
-            <PrivateRoutes path="/rentalList" exact component={rentalList} />
+            <PrivateRoutes path="/addRental" exact component={WithPermission(RentalPlacement, "rentalMange")} />
+            <PrivateRoutes path="/rentalList" exact component={WithPermission(rentalList, "rentalMange")}/>
             
             {/*  */}
-            <PrivateRoutes path="/addEvent" exact component={Event} />
-            <PrivateRoutes path="/viewEvent"  exact component={ViewEvent} />
-            <PrivateRoutes path="/reservation/report" exact component={EventReport} />
-            <PrivateRoutes path="/display/RemoveEventlist" exact component={DeleteRecord} />
+            <PrivateRoutes path="/addEvent" exact component={WithPermission(Event, "rentalMange")} />
+            <PrivateRoutes path="/viewEvent"  exact component={WithPermission(ViewEvent, "rentalMange")}/>
+            <PrivateRoutes path="/reservation/report" exact component={WithPermission(EventReport, "rentalMange")}/>
+            <PrivateRoutes path="/display/RemoveEventlist" exact component={WithPermission(DeleteRecord, "rentalMange")}/>
             
             <PrivateRoutes path="/add-new-employee" exact component={WithPermission(AddEmployee, "employeeManage")} />
             <PrivateRoutes path="/all-employee-list" exact  component={WithPermission(AllEmployee, "employeeManage")} />
