@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-
+import { updateVehicle } from '../../services/util/vehicle';
 
 
 
@@ -104,83 +104,62 @@ function UpdateVehicleModal(vehicle) {
     // console.log("came dataaaaa", uptVehicle)
 
 
-    function sendData(e) {
+   
 
-        e.preventDefault();
+function sendData(e) {
+    e.preventDefault();
 
-        const YearsValid = YearsValidation();
+    const YearsValid = YearsValidation();
 
-        if (YearsValid) {
+    if (YearsValid) {
+        const updatedVehicleData = {
+            VehicleID,
+            OwnerName,
+            OwnerNIC,
+            TeleNo,
+            Address,
+            Email,
+            Date,
+            VehicleRegNo,
+            VehicleModel,
+            VehicleType,
+            VehicleBrand,
+            Mileage,
+            InsType,
+            InsComName,
+            Transmission,
+            AirC,
+            NoOfSeats,
+            RatePDay,
+            YearsRent,
+        };
 
+        // Assuming you have the Vehicle ID available to identify the specific vehicle to update
+        const vehicleID = "123"; // Replace with the actual Vehicle ID
 
-
-
-            const newVehicle = {
-
-                VehicleID,
-                OwnerName,
-                OwnerNIC,
-                TeleNo,
-                Address,
-                Email,
-                Date,
-                VehicleRegNo,
-                VehicleModel,
-                VehicleType,
-                VehicleBrand,
-                Mileage,
-                InsType,
-                InsComName,
-                Transmission,
-                AirC,
-                NoOfSeats,
-                RatePDay,
-                YearsRent,
-                // vehPic,
-                // vehDoc
-
-
-
-            }
-
-            // const updateVehicle (VehicleID, newVehicle).then((response) => {
-            //     // const message = response.ok
-            //     //     ? "Employee insertion successful"
-            //     //     : response.err;
-            //     // alert(message);
-            //     //window.location.replace("/empList");
-            // });
-
-            axios.put(`http://localhost:8070/vehicle/updateV/${vehicle.data._id}`, newVehicle)
-
-                .then(() => {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Vehicle Details Added Succesfully',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 2000
-                    }
-                    ).then(() => {
-                        window.location.replace("/vehicle/viewVehicle");
-
-                    })
+        updateVehicle(vehicleID, updatedVehicleData)
+            .then(() => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Vehicle Details Updated Successfully',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then(() => {
                     window.location.replace("/vehicle/viewVehicle");
-
-                }).catch((err) => {
-                    const msgerr = err.response.data.status
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: `${msgerr}`,
-                        confirmButtonColor: '#1fc191',
-
-                    })
-                })
-
-            // }
-        }
+                });
+            })
+            .catch((err) => {
+                const msgerr = err.response.data.status;
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: `${msgerr}`,
+                    confirmButtonColor: '#1fc191',
+                });
+            });
     }
+}
 
     const [isYearsValid, setYearsValid] = useState(false);
     const [Yearmessage, setYearMessage] = useState('');

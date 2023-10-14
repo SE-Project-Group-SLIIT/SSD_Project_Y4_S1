@@ -95,8 +95,6 @@ function AddVehicle() {
 
                             })
 
-                        
-
                         }).catch((err) => {
 
                             const msgerr = err.response.data.status
