@@ -23,7 +23,7 @@ function UpdateVehicleModal(vehicle) {
             setDate(vehicle.data.Date);
             setMileage(vehicle.data.Mileage);
 
-
+            setID(vehicle.data._id);
             setVehicleID(vehicle.data.VehicleID);
             setVehicleRegNo(vehicle.data.VehicleRegNo);
             setVehicleModel(vehicle.data.VehicleModel);
@@ -51,7 +51,7 @@ function UpdateVehicleModal(vehicle) {
     const [Address, setAddress] = useState("");
     const [Email, setEmail] = useState("");
     const [Date, setDate] = useState("");
-
+    const [id, setID] = useState("");
     const [VehicleID, setVehicleID] = useState("");
     const [VehicleRegNo, setVehicleRegNo] = useState("");
     const [VehicleModel, setVehicleModel] = useState("");
@@ -72,39 +72,6 @@ function UpdateVehicleModal(vehicle) {
 
     const [YearsErr, setYearsErr] = useState("");
 
-
-    const uptVehicle = {
-
-
-        VehicleID,
-        OwnerName,
-        OwnerNIC,
-        TeleNo,
-        Address,
-        Email,
-        Date,
-        VehicleRegNo,
-        VehicleModel,
-        VehicleType,
-        VehicleBrand,
-        Mileage,
-        InsType,
-        InsComName,
-        Transmission,
-        AirC,
-        NoOfSeats,
-        RatePDay,
-        YearsRent,
-        // vehPic,
-        // vehDoc
-
-
-    }
-
-    // console.log("came dataaaaa", uptVehicle)
-
-
-   
 
 function sendData(e) {
     e.preventDefault();
@@ -132,12 +99,12 @@ function sendData(e) {
             NoOfSeats,
             RatePDay,
             YearsRent,
+            id,
         };
 
-        // Assuming you have the Vehicle ID available to identify the specific vehicle to update
-        const vehicleID = "123"; // Replace with the actual Vehicle ID
+        // Assuming you have the Vehicle ID available to identify the specific vehicle to update // Replace with the actual Vehicle ID
 
-        updateVehicle(vehicleID, updatedVehicleData)
+        updateVehicle(updatedVehicleData)
             .then(() => {
                 Swal.fire({
                     title: 'Success!',
