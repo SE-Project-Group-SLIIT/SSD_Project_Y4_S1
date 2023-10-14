@@ -4,44 +4,46 @@ import { withRouter } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import {
-  viewEmployees,
-  inactiveEmployee,
-  activeEmployee,
+	viewEmployees,
+	inactiveEmployee,
+	activeEmployee,
 } from "../../services/util/employee";
 import UpdateEmployee from "./UpdateEmployee";
 import Header from "../shared/Header";
 
 export default function AllEmployee() {
-  // const [search, setSearch] = useState("");
+	// const [search, setSearch] = useState("");
 
-  const [employees, setEmployees] = useState([]);
+	const [employees, setEmployees] = useState([]);
 
-  const [ModalEmpUpdate, setModalEmpUpdate] = useState([]);
-  const [ModalEmpUpdateConfirm, setModalEmpUpdateConfirm] = useState(false);
+	const [ModalEmpUpdate, setModalEmpUpdate] = useState([]);
+	const [ModalEmpUpdateConfirm, setModalEmpUpdateConfirm] =
+		useState(false);
 
-  const [ModalEmpDelete, setModalEmpDelete] = useState([]);
-  const [ModalEmpDeleteConfirm, setModalEmpDeleteConfirm] = useState(false);
+	const [ModalEmpDelete, setModalEmpDelete] = useState([]);
+	const [ModalEmpDeleteConfirm, setModalEmpDeleteConfirm] =
+		useState(false);
 
 	const [ModalEmpActive, setModalEmpActive] = useState([]);
 	const [ModalEmpActiveConfirm, setModalEmpActiveConfirm] =
 		useState(false);
 
-  useEffect(() => {
-    async function getEmployees() {
-      try {
-        let respond = await viewEmployees();
-        if (respond.data) {
-          setEmployees(respond.data);
-        } else {
-          console.log("error");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
+	useEffect(() => {
+		async function getEmployees() {
+			try {
+				let respond = await viewEmployees();
+				if (respond.data) {
+					setEmployees(respond.data);
+				} else {
+					console.log("error");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
 
-    getEmployees();
-  }, []);
+		getEmployees();
+	}, []);
 
 	const deleteEmployee = async (id) => {
 		try {
@@ -83,7 +85,7 @@ export default function AllEmployee() {
 					showConfirmButton: false,
 					timer: 2000,
 				}).then(() => {
-					// window.location.replace("/all-employee-list");
+					window.location.replace("/all-employee-list");
 				});
 				return response.data;
 			} else {
@@ -97,15 +99,15 @@ export default function AllEmployee() {
 		}
 	};
 
-  const openModalEmpUpdate = (data) => {
-    setModalEmpUpdate(data);
-    setModalEmpUpdateConfirm(true);
-  };
+	const openModalEmpUpdate = (data) => {
+		setModalEmpUpdate(data);
+		setModalEmpUpdateConfirm(true);
+	};
 
-  const openModalEmpDelete = (data) => {
-    setModalEmpDelete(data);
-    setModalEmpDeleteConfirm(true);
-  };
+	const openModalEmpDelete = (data) => {
+		setModalEmpDelete(data);
+		setModalEmpDeleteConfirm(true);
+	};
 
 	const openModalEmpActivate = (data) => {
 		console.log("delEmp");
@@ -113,10 +115,10 @@ export default function AllEmployee() {
 		setModalEmpActiveConfirm(true);
 	};
 
-  return (
-    <div className="container pt-2">
-      <div className="page-component-body">
-        <Header></Header>
+	return (
+		<div className="container pt-2">
+			<div className="page-component-body">
+				<Header></Header>
 
 				<div className="table-emp" style={{ width: "1200px" }}>
 					<div class="row table-head mt-4 mb-5">
@@ -264,19 +266,18 @@ export default function AllEmployee() {
 					</table>
 				</div>
 
-        {/* modal for update employee details */}
-        <Modal
-          show={ModalEmpUpdateConfirm}
-          onHide={() => setModalEmpUpdateConfirm(false)}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <UpdateEmployee
-            data={ModalEmpUpdate}
-            onHide={() => setModalEmpUpdate(false)}
-          />
-        </Modal>
+				{/* modal for update employee details */}
+				<Modal
+					show={ModalEmpUpdateConfirm}
+					onHide={() => setModalEmpUpdateConfirm(false)}
+					size="lg"
+					aria-labelledby="contained-modal-title-vcenter"
+					centered>
+					<UpdateEmployee
+						data={ModalEmpUpdate}
+						onHide={() => setModalEmpUpdate(false)}
+					/>
+				</Modal>
 
 				{/* modal for delete employee details */}
 				<Modal
