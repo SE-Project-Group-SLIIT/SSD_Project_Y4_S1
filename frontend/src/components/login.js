@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import { signin, getAccountStatus } from "./../services/util/auth";
 import Swal from "sweetalert2";
 
 export default function LoginUser() {
-	let history = useHistory();
 	const [username, setUserName] = useState("");
 	const [password, setPassword] = useState("");
-	const [login, setLogin] = useState([]);
 
 	async function checkUser(e) {
 		//function checks the availbilty of the admin within the system
@@ -24,9 +21,7 @@ export default function LoginUser() {
 				icon: "error",
 				showConfirmButton: false,
 				timer: 2000,
-			}).then(() => {
-				// window.location.replace("/all-employee-list");
-			});
+			}).then(() => {});
 		}
 	}
 
@@ -85,12 +80,6 @@ export default function LoginUser() {
 										}}
 									/>
 								</div>
-								{/* <div className="mb-3">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="cb1"/>{" "}
-                            <label className="custom-control-label" for="cb1">Remember me</label>
-                        </div>
-                    </div> */}
 								<div className="mb-3">
 									<button
 										class="btn btn-ok white"
