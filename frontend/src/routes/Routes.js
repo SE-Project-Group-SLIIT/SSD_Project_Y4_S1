@@ -37,7 +37,7 @@ import WithPermission from "./withPermission"; // Import your HOC
             <PrivateRoutes path = "/vehicle/viewVehicle" exact component={WithPermission(vehicleList, "vehicleManage")}/>
             <PrivateRoutes path = "/vehicle/view" exact component={WithPermission(DeletedList, "vehicleManage")}/>
             <PrivateRoutes path = "/vehicle/viewVehicleReport" exact component={WithPermission(VehicleReport, "vehicleManage")}/> 
-            <PublicRoutes path = "/login" exact component={login}/>
+            <PublicRoutes path = "/" exact component={login}/>
             
             <PrivateRoutes path="/addRental" exact component={WithPermission(RentalPlacement, "rentalMange")} />
             <PrivateRoutes path="/rentalList" exact component={WithPermission(rentalList, "rentalMange")}/>
