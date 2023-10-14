@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { withRouter } from 'react-router-dom';
 import Swal from 'sweetalert2'
-
+import { viewVehicle } from '../../services/util/vehicle';
 import TestModal from './ViewVehicle';
 
 import UpdateVehicleModal from "./updateVehicleModal";
@@ -29,34 +29,22 @@ function VehicleList() {
     
 
 
-
     useEffect(() => {
-
-        function getVehicles() {
-            axios.get("http://localhost:8070/vehicle/viewVehicle").then((res) => {
-
-
-                setVehicles(res.data.reverse());
-
-                //console.log("Data recieved");
-
-            }).catch((error) => {
-                // alert(error.message);
-                console.log("f354754",error);
-
+        async function fetchVehicles() {
+            try {
+                const vehicleData = await viewVehicle();
+                setVehicles(vehicleData);
+            } catch (error) {
+                console.error("Error fetching vehicle data:", error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Something went wrong!',
                     confirmButtonColor: '#207159',
-
-                })
-            })
-
+                });
+            }
         }
-
-        getVehicles();
-
+        fetchVehicles();
     }, []);
 
 
