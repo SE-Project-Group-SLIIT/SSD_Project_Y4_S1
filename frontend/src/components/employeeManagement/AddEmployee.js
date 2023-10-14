@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import moment from "moment";
-import DatePicker from "react-datetime";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 import { addEmployees } from "../../services/util/employee";
 
 import Header from "../shared/Header";
@@ -12,11 +11,15 @@ export default function AddEmployee() {
 	const [lastName, setLastName] = useState("");
 	const [address, setAddress] = useState("");
 	const [nic, setNIC] = useState("");
-	const [dateOfBirth, setDateOfBirth] = useState(moment().format('MM-DD-YYYY'));
+	const [dateOfBirth, setDateOfBirth] = useState(
+		moment().format("MM-DD-YYYY"),
+	);
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [emailAddress, setEmailAddress] = useState("");
 	const [gender, setGender] = useState("");
-	const [joiningDate, setJoiningDate] = useState(moment().format('MM-DD-YYYY'));
+	const [joiningDate, setJoiningDate] = useState(
+		moment().format("MM-DD-YYYY"),
+	);
 	const [designation, setDesignation] = useState("");
 
 	const [TeleErr, setTeleNoErr] = useState("");
@@ -24,50 +27,50 @@ export default function AddEmployee() {
 
 	async function sendData(e) {
 		e.preventDefault();
-	  
+
 		const teleValid = TeleValidation();
 		const NICValid = NICValidation();
-	  
+
 		const newEmployee = {
-		  firstName,
-		  lastName,
-		  address,
-		  nic,
-		  dateOfBirth,
-		  phoneNumber,
-		  emailAddress,
-		  gender,
-		  joiningDate,
-		  designation,
+			firstName,
+			lastName,
+			address,
+			nic,
+			dateOfBirth,
+			phoneNumber,
+			emailAddress,
+			gender,
+			joiningDate,
+			designation,
 		};
-	  
+
 		// Send data to the backend
 		if (teleValid === true && NICValid === true) {
-		  try {
-			const response = await addEmployees(newEmployee); // Call your backend function
-			// Handle success response here
-			Swal.fire({
-			  title: "Success!",
-			  text: "Employee Details Added Successfully",
-			  icon: "success",
-			  showConfirmButton: false,
-			  timer: 2000,
-			}).then(() => {
-			  window.location.replace("/all-employee-list");
-			});
-		  } catch (error) {
-			// Handle error response here
-			const msgerr = error.response.data.msg || "An error occurred";
-			Swal.fire({
-			  icon: "warning",
-			  title: "Oops...",
-			  text: `${msgerr}`,
-			  confirmButtonColor: "#1fc191",
-			});
-		  }
+			try {
+				const response = await addEmployees(newEmployee); // Call your backend function
+				// Handle success response here
+				Swal.fire({
+					title: "Success!",
+					text: "Employee Details Added Successfully",
+					icon: "success",
+					showConfirmButton: false,
+					timer: 2000,
+				}).then(() => {
+					window.location.replace("/all-employee-list");
+				});
+			} catch (error) {
+				// Handle error response here
+				const msgerr =
+					error.response.data.msg || "An error occurred";
+				Swal.fire({
+					icon: "warning",
+					title: "Oops...",
+					text: `${msgerr}`,
+					confirmButtonColor: "#1fc191",
+				});
+			}
 		}
-	  }
-	  
+	}
 
 	const TeleValidation = () => {
 		//validate function
@@ -77,24 +80,20 @@ export default function AddEmployee() {
 
 		if (phoneNumber.trim().length > 10) {
 			TeleErr.InValidTeleNo = " *Invalid Telephone Number"; // error msg
-			// alert("**Invalid Telephone Number");
 			Swal.fire({
 				icon: "error",
 				title: "Oops...Invalid Telephone Number",
 				text: "You enterd Invalid Telephone Number , Try Again !!",
 				confirmButtonColor: "#1fc191",
-				// footer: '<a href=""#home">Why do I have this issue?</a>'
 			});
 			teleValid = false;
 		} else if (phoneNumber.trim().length < 10) {
 			TeleErr.InValidTeleNo = " *Invalid Telephone Number"; // error msg
-			// alert("**Invalid Telephone Number");
 			Swal.fire({
 				icon: "error",
 				title: "Oops...Invalid Telephone Number",
 				text: "You enterd Invalid Telephone Number , Try Again !!",
 				confirmButtonColor: "#1fc191",
-				// footer: '<a href=""#home">Why do I have this issue?</a>'
 			});
 			teleValid = false;
 		}
@@ -116,7 +115,6 @@ export default function AddEmployee() {
 				title: "Oops...Invalid NIC Number",
 				text: "You enterd invalid NIC , Try Again !!",
 				confirmButtonColor: "#1fc191",
-				// footer: '<a href=""#home">Why do I have this issue?</a>'
 			});
 			NICValid = false;
 		} else if (nic.trim().length < 10) {
@@ -127,7 +125,6 @@ export default function AddEmployee() {
 				title: "Oops... Invalid NIC Number",
 				text: "You enterd invalid NIC , Try Again !!",
 				confirmButtonColor: "#1fc191",
-				// footer: '<a href=""#home">Why do I have this issue?</a>'
 			});
 			NICValid = false;
 		}
@@ -212,7 +209,6 @@ export default function AddEmployee() {
 								onSubmit={sendData}>
 								<div className="row">
 									<div class="form-group col-md-6">
-										{/* <label class="form-label" for="Name">Name : </label> */}
 										<input
 											type="text"
 											class="form-control formInput"
@@ -246,7 +242,6 @@ export default function AddEmployee() {
 									</div>
 								</div>
 								<div class="form-group">
-									{/* <label class="form-label" for="Address">Address : </label> */}
 									<input
 										type="text"
 										class="form-control formInput"
@@ -263,7 +258,6 @@ export default function AddEmployee() {
 
 								<div className="row">
 									<div class="form-group col-md-6">
-										{/* <label class="form-label" for="NIC">NIC : </label> */}
 										<input
 											type="text"
 											class="form-control formInput"
@@ -291,7 +285,6 @@ export default function AddEmployee() {
 									</div>
 
 									<div class="form-group col-md-6">
-										{/* <label class="form-label" for="Email">Email : </label> */}
 										<input
 											type="email"
 											class="form-control formInput"
@@ -319,7 +312,6 @@ export default function AddEmployee() {
 
 								<div className="row">
 									<div class="form-group col-md-6">
-										{/* <label class="form-label" for="Phone">Phone : </label> */}
 										<input
 											type="text"
 											class="form-control formInput"
@@ -349,41 +341,39 @@ export default function AddEmployee() {
 											},
 										)}
 									</div>
-										<div class="form-group col-md-6">
-											{/* <label class="form-label" for="Gender">Gender : </label> */}
-											<input
-												type="radio"
-												id="Gender"
-												name="Gender"
-												value="Male"
-												required
-												onChange={(e) => {
-													setGender(
-														e.target.value,
-													);
-												}}
-											/>{" "}
-											Male{" "}
-											<input
-												type="radio"
-												id="Gender"
-												name="Gender"
-												value="Female"
-												required
-												onChange={(e) => {
-													setGender(
-														e.target.value,
-													);
-													// {' '}
-												}}
-											/>{" "}
-											Female
-										</div>
+									<div class="form-group col-md-6">
+										<label for="Gender">
+											Gender :
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</label>
+										<input
+											type="radio"
+											id="Gender"
+											name="Gender"
+											value="Male"
+											required
+											onChange={(e) => {
+												setGender(e.target.value);
+											}}
+										/>{" "}
+										Male{" "}
+										<input
+											type="radio"
+											id="Gender"
+											name="Gender"
+											value="Female"
+											required
+											onChange={(e) => {
+												setGender(e.target.value);
+											}}
+										/>{" "}
+										Female
 									</div>
+								</div>
 
-									<div className="row">
-                                    <div class="form-group col-md-6">
-										{/* <label class="form-label" for="DOB">DOB : </label> */}
+								<div className="row">
+									<div class="form-group col-md-6">
+										<label for="DOB">DOB : </label>
 										<input
 											type="date"
 											class="form-control formInput"
@@ -399,7 +389,9 @@ export default function AddEmployee() {
 										/>
 									</div>
 									<div class="form-group col-md-6">
-										{/* <label class="form-label" for="JoiningDate">JoiningDate : </label> */}
+										<label for="JoiningDate">
+											JoiningDate :{" "}
+										</label>
 										<input
 											type="date"
 											class="form-control formInput"
@@ -417,7 +409,6 @@ export default function AddEmployee() {
 								</div>
 								<div className="row">
 									<div class="form-group col-md-6">
-										{/* <label class="form-label" for="Designation">Designation : </label> */}
 										<input
 											type="text"
 											class="form-control formInput"
